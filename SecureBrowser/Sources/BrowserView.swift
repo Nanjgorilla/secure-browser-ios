@@ -38,7 +38,7 @@ struct TabPage: View {
                     .keyboardType(.webSearch).autocorrectionDisabled().textInputAutocapitalization(.never)
                     .submitLabel(.go).focused($focused)
                     .onSubmit { tab.load(input: input) }
-                Button { tab.isLoading ? tab.webView.stopLoading() : tab.webView.reload() } label: {
+                Button { if tab.isLoading { tab.webView.stopLoading() } else { tab.webView.reload() } } label: {
                     Image(systemName: tab.isLoading ? "xmark" : "arrow.clockwise")
                 }.accessibilityLabel(tab.isLoading ? "停止" : "再読み込み")
             }
